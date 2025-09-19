@@ -1,0 +1,114 @@
+<body style="margin:0;font-family:'Comic Sans MS',cursive;text-align:center;color:white;
+  background:radial-gradient(circle at center, #ff0000, #ffff00, #00ff00, #00ffff, #ff00ff);
+  animation:bgflash 1s infinite alternate;overflow-x:hidden;overflow-y:hidden;height:100vh;">
+
+  <!-- autoplay hype music -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- spinning header -->
+  <h1 style="font-size:60px;color:#00ff00;text-shadow:4px 4px #ff00ff;animation:spintext 5s linear infinite;">
+    🎮 Totally Legit Game Loader 🎮
+  </h1>
+
+  <!-- flashing subtitle -->
+  <h2 style="font-size:50px;color:#ffff00;text-shadow:3px 3px #ff00ff;animation:flashText 0.5s infinite alternate;">
+    paste ur game link lol 🌹
+  </h2>
+
+  <!-- info box -->
+  <p style="font-size:20px;color:#fff;background:black;display:inline-block;padding:10px 15px;
+    border:5px dotted cyan;box-shadow:0 0 25px magenta;text-transform:uppercase;animation:flashBorder 1s infinite alternate;">
+    it’s fine if it breaks, just smash fullscreen 👀
+  </p>
+
+  <!-- input -->
+  <input id="gameUrl" type="text" placeholder="link it up bro" 
+    style="width:70%;margin:20px auto;padding:14px;font-size:22px;border:6px ridge yellow;background:black;color:lime;
+      box-shadow:0 0 30px hotpink inset;display:block;transition:0.3s;"
+      onmouseover="this.style.boxShadow='0 0 50px cyan inset';"
+      onmouseout="this.style.boxShadow='0 0 30px hotpink inset';">
+
+  <br>
+
+  <!-- load button -->
+  <button onclick="loadGame()" 
+    style="padding:18px 35px;background:linear-gradient(45deg, cyan, magenta, lime, yellow);
+      color:black;font-size:28px;font-weight:bold;border:8px double white;cursor:pointer;
+      box-shadow:0 0 50px cyan,0 0 25px magenta;animation:spin 3s linear infinite;transition:0.3s;"
+      onmouseover="this.style.boxShadow='0 0 70px lime,0 0 40px magenta';"
+      onmouseout="this.style.boxShadow='0 0 50px cyan,0 0 25px magenta';">
+    🚨 LOAD GAME 🚨
+  </button>
+
+  <br><br>
+
+  <!-- iframe container -->
+  <div id="embedContainer" 
+    style="display:none;border:12px dotted hotpink;width:92%;height:500px;margin:25px auto;
+    background:#111;box-shadow:inset 0 0 60px lime,0 0 30px cyan;position:relative;overflow:hidden;">
+    <iframe id="gameFrame" src="" style="width:100%;height:100%;border:0;"></iframe>
+    <!-- floating emojis -->
+    <div style="position:absolute;top:50%;left:20%;font-size:40px;animation:floatEmoji 2s infinite;">💥</div>
+    <div style="position:absolute;bottom:30%;right:25%;font-size:50px;animation:floatEmoji 2.5s infinite;">✨</div>
+  </div>
+
+  <br>
+
+  <!-- fullscreen -->
+  <a id="fullscreenBtn" href="about:blank" 
+    style="display:none;margin-top:15px;display:inline-block;padding:20px 35px;
+    background:linear-gradient(90deg, violet, blue, cyan, lime, yellow, orange, red);
+    color:black;text-decoration:none;font-size:26px;font-weight:bold;border:8px groove white;
+    box-shadow:0 0 60px magenta;animation:spin 5s linear infinite reverse;transition:0.3s;"
+    onmouseover="this.style.boxShadow='0 0 80px lime,0 0 50px magenta';"
+    onmouseout="this.style.boxShadow='0 0 60px magenta';">
+    🌟 fullscreen 🌟
+  </a>
+
+  <!-- cursed styles -->
+  <style>
+    @keyframes bgflash {
+      0% {filter:hue-rotate(0deg);}
+      100% {filter:hue-rotate(360deg);}
+    }
+    @keyframes spin {
+      0% {transform:rotate(0deg);}
+      100% {transform:rotate(360deg);}
+    }
+    @keyframes spintext {
+      0% {letter-spacing:0px;}
+      100% {letter-spacing:25px;}
+    }
+    @keyframes flashText {
+      0% {color:#ffff00;}
+      50% {color:#ff00ff;}
+      100% {color:#00ffff;}
+    }
+    @keyframes flashBorder {
+      0% {border-color:cyan;box-shadow:0 0 25px magenta;}
+      50% {border-color:lime;box-shadow:0 0 35px yellow;}
+      100% {border-color:magenta;box-shadow:0 0 25px cyan;}
+    }
+    @keyframes floatEmoji {
+      0% {transform:translateY(0) rotate(0deg);}
+      50% {transform:translateY(-20px) rotate(180deg);}
+      100% {transform:translateY(0) rotate(360deg);}
+    }
+    button:hover {filter:invert(100%);}
+    #fullscreenBtn:hover {background:white;color:magenta;}
+  </style>
+
+  <script>
+    function loadGame(){
+      var url=document.getElementById('gameUrl').value.trim();
+      if(!url){alert("yo paste a link first lol");return;}
+      document.getElementById('embedContainer').style.display="block";
+      document.getElementById('gameFrame').src=url;
+      var fs=document.getElementById('fullscreenBtn');
+      fs.style.display="inline-block";
+      fs.setAttribute("onclick",`var w=window.open('','_blank');w.document.write("<body style='margin:0;overflow:hidden;background:black'><iframe src='${url}' style='width:100%;height:100%;border:none'></iframe></body>");return false;`);
+    }
+  </script>
+</body>
