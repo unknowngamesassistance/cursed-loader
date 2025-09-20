@@ -106,7 +106,7 @@
       if(!url){ alert("yo paste a link first lol"); return; }
 
       // use your cloudflare worker here
-      var proxyUrl = "https://proxy-iframe.unknowngamesassistance.workers.dev/?u=" + encodeURIComponent(url);
+      var proxyUrl = "https://winter-voice-bb2a.unknowngamesassistance.workers.dev/?u=" + encodeURIComponent(url);
 
       document.getElementById('embedContainer').style.display = "block";
       document.getElementById('gameFrame').src = proxyUrl;
