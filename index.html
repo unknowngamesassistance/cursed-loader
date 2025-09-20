@@ -101,19 +101,25 @@
   </style>
 
   <script>
+    const proxyUrl = "https://delicate-recipe-b7cc.unknowngamesassistance.workers.dev/?url=";
+
     function loadGame(){
       var url = document.getElementById('gameUrl').value.trim();
-      if(!url){ alert("yo paste a link first lol"); return; }
-
-      // use your cloudflare worker here
-      var proxyUrl = "https://winter-voice-bb2a.unknowngamesassistance.workers.dev/?u=" + encodeURIComponent(url);
-
+      if(!url){alert("yo paste a link first lol"); return;}
+      
+      // show iframe container
       document.getElementById('embedContainer').style.display = "block";
-      document.getElementById('gameFrame').src = proxyUrl;
+      // load via Cloudflare Worker proxy
+      document.getElementById('gameFrame').src = proxyUrl + encodeURIComponent(url);
 
+      // setup fullscreen button
       var fs = document.getElementById('fullscreenBtn');
       fs.style.display = "inline-block";
-      fs.href = proxyUrl;
+      fs.setAttribute("onclick",
+        `var w = window.open('', '_blank');
+         w.document.write("<body style='margin:0;overflow:hidden;background:black'><iframe src='${proxyUrl}${encodeURIComponent(url)}' style='width:100%;height:100%;border:none'></iframe></body>");
+         return false;`
+      );
     }
   </script>
 </body>
