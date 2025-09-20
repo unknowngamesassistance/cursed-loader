@@ -69,56 +69,35 @@
 
   <!-- cursed styles -->
   <style>
-    @keyframes bgflash {
-      0% {filter:hue-rotate(0deg);}
-      100% {filter:hue-rotate(360deg);}
-    }
-    @keyframes spin {
-      0% {transform:rotate(0deg);}
-      100% {transform:rotate(360deg);}
-    }
-    @keyframes spintext {
-      0% {letter-spacing:0px;}
-      100% {letter-spacing:25px;}
-    }
-    @keyframes flashText {
-      0% {color:#ffff00;}
-      50% {color:#ff00ff;}
-      100% {color:#00ffff;}
-    }
-    @keyframes flashBorder {
-      0% {border-color:cyan;box-shadow:0 0 25px magenta;}
-      50% {border-color:lime;box-shadow:0 0 35px yellow;}
-      100% {border-color:magenta;box-shadow:0 0 25px cyan;}
-    }
-    @keyframes floatEmoji {
-      0% {transform:translateY(0) rotate(0deg);}
-      50% {transform:translateY(-20px) rotate(180deg);}
-      100% {transform:translateY(0) rotate(360deg);}
-    }
+    @keyframes bgflash {0% {filter:hue-rotate(0deg);}100% {filter:hue-rotate(360deg);}}
+    @keyframes spin {0% {transform:rotate(0deg);}100% {transform:rotate(360deg);}}
+    @keyframes spintext {0% {letter-spacing:0px;}100% {letter-spacing:25px;}}
+    @keyframes flashText {0% {color:#ffff00;}50% {color:#ff00ff;}100% {color:#00ffff;}}
+    @keyframes flashBorder {0% {border-color:cyan;box-shadow:0 0 25px magenta;}50% {border-color:lime;box-shadow:0 0 35px yellow;}100% {border-color:magenta;box-shadow:0 0 25px cyan;}}
+    @keyframes floatEmoji {0% {transform:translateY(0) rotate(0deg);}50% {transform:translateY(-20px) rotate(180deg);}100% {transform:translateY(0) rotate(360deg);}}
     button:hover {filter:invert(100%);}
     #fullscreenBtn:hover {background:white;color:magenta;}
   </style>
 
   <script>
-    const proxyUrl = "https://delicate-recipe-b7cc.unknowngamesassistance.workers.dev/?url=";
-
-    function loadGame(){
+    function loadGame() {
       var url = document.getElementById('gameUrl').value.trim();
-      if(!url){alert("yo paste a link first lol"); return;}
+      if (!url) { alert("paste a link first!"); return; }
+
+      var ultravioletProxy = "https://ultraviolet.titaniumnetwork.dev/"; // public UV proxy
 
       // show iframe container
       document.getElementById('embedContainer').style.display = "block";
       
-      // load live site via proxy (bypasses iframe block)
-      document.getElementById('gameFrame').src = proxyUrl + encodeURIComponent(url);
+      // load site through UV proxy
+      document.getElementById('gameFrame').src = ultravioletProxy + encodeURIComponent(url);
 
-      // fullscreen button uses proxy too
+      // fullscreen button also uses UV proxy
       var fs = document.getElementById('fullscreenBtn');
       fs.style.display = "inline-block";
       fs.setAttribute("onclick",
         `var w = window.open('', '_blank');
-         w.document.write("<body style='margin:0;overflow:hidden;background:black'><iframe src='${proxyUrl}${encodeURIComponent(url)}' style='width:100%;height:100%;border:none'></iframe></body>");
+         w.document.write("<body style='margin:0;overflow:hidden;background:black'><iframe src='${ultravioletProxy}${encodeURIComponent(url)}' style='width:100%;height:100%;border:none'></iframe></body>");
          return false;`
       );
     }
