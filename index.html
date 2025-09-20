@@ -102,13 +102,18 @@
 
   <script>
     function loadGame(){
-      var url=document.getElementById('gameUrl').value.trim();
-      if(!url){alert("yo paste a link first lol");return;}
-      document.getElementById('embedContainer').style.display="block";
-      document.getElementById('gameFrame').src=url;
-      var fs=document.getElementById('fullscreenBtn');
-      fs.style.display="inline-block";
-      fs.setAttribute("onclick",`var w=window.open('','_blank');w.document.write("<body style='margin:0;overflow:hidden;background:black'><iframe src='${url}' style='width:100%;height:100%;border:none'></iframe></body>");return false;`);
+      var url = document.getElementById('gameUrl').value.trim();
+      if(!url){ alert("yo paste a link first lol"); return; }
+
+      // use your cloudflare worker here
+      var proxyUrl = "https://proxy-iframe.unknowngamesassistance.workers.dev/?u=" + encodeURIComponent(url);
+
+      document.getElementById('embedContainer').style.display = "block";
+      document.getElementById('gameFrame').src = proxyUrl;
+
+      var fs = document.getElementById('fullscreenBtn');
+      fs.style.display = "inline-block";
+      fs.href = proxyUrl;
     }
   </script>
 </body>
