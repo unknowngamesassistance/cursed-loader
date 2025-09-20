@@ -106,13 +106,14 @@
     function loadGame(){
       var url = document.getElementById('gameUrl').value.trim();
       if(!url){alert("yo paste a link first lol"); return;}
-      
+
       // show iframe container
       document.getElementById('embedContainer').style.display = "block";
-      // load via Cloudflare Worker proxy
+      
+      // load live site via proxy (bypasses iframe block)
       document.getElementById('gameFrame').src = proxyUrl + encodeURIComponent(url);
 
-      // setup fullscreen button
+      // fullscreen button uses proxy too
       var fs = document.getElementById('fullscreenBtn');
       fs.style.display = "inline-block";
       fs.setAttribute("onclick",
